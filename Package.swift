@@ -4,7 +4,7 @@
 import PackageDescription
 
 let package = Package(
-    name: "mlx-libraries",
+    name: "mlx-swift-lm",
     platforms: [.macOS(.v14), .iOS(.v16)],
     products: [
         .library(
@@ -17,14 +17,8 @@ let package = Package(
             name: "MLXLMCommon",
             targets: ["MLXLMCommon"]),
         .library(
-            name: "MLXMNIST",
-            targets: ["MLXMNIST"]),
-        .library(
             name: "MLXEmbedders",
             targets: ["MLXEmbedders"]),
-        .library(
-            name: "StableDiffusion",
-            targets: ["StableDiffusion"]),
     ],
     dependencies: [
         .package(url: "https://github.com/ml-explore/mlx-swift", .upToNextMinor(from: "0.29.1")),
@@ -32,7 +26,6 @@ let package = Package(
             url: "https://github.com/huggingface/swift-transformers",
             .upToNextMinor(from: "1.1.0")
         ),
-        .package(url: "https://github.com/1024jp/GzipSwift", "6.0.1" ... "6.0.1"),  // Only needed by MLXMNIST
     ],
     targets: [
         .target(
@@ -124,41 +117,6 @@ let package = Package(
             path: "Libraries/Embedders",
             exclude: [
                 "README.md"
-            ]
-        ),
-        .target(
-            name: "MLXMNIST",
-            dependencies: [
-                .product(name: "MLX", package: "mlx-swift"),
-                .product(name: "MLXFast", package: "mlx-swift"),
-                .product(name: "MLXNN", package: "mlx-swift"),
-                .product(name: "MLXOptimizers", package: "mlx-swift"),
-                .product(name: "MLXRandom", package: "mlx-swift"),
-                .product(name: "Transformers", package: "swift-transformers"),
-                .product(name: "Gzip", package: "GzipSwift"),
-            ],
-            path: "Libraries/MLXMNIST",
-            exclude: [
-                "README.md"
-            ],
-            swiftSettings: [
-                .enableExperimentalFeature("StrictConcurrency")
-            ]
-        ),
-        .target(
-            name: "StableDiffusion",
-            dependencies: [
-                .product(name: "MLX", package: "mlx-swift"),
-                .product(name: "MLXNN", package: "mlx-swift"),
-                .product(name: "MLXRandom", package: "mlx-swift"),
-                .product(name: "Transformers", package: "swift-transformers"),
-            ],
-            path: "Libraries/StableDiffusion",
-            exclude: [
-                "README.md"
-            ],
-            swiftSettings: [
-                .enableExperimentalFeature("StrictConcurrency")
             ]
         ),
     ]

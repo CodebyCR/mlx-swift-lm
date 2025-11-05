@@ -1,6 +1,6 @@
 //
 //  LFM2.swift
-//  mlx-swift-examples
+//  mlx-swift-lm
 //
 //  Created by John Mai on 2025/7/12.
 //

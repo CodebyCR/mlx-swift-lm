@@ -1,6 +1,6 @@
 //
 //  Ernie4_5.swift
-//  mlx-swift-examples
+//  mlx-swift-lm
 //
 //  Created by Sachin Desai on 7/3/25.
 //

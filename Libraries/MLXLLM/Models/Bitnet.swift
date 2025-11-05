@@ -1,6 +1,6 @@
 //
 //  Bitnet.swift
-//  mlx-swift-examples
+//  mlx-swift-lm
 //
 //  Created by John Mai on 2025/6/12.
 //

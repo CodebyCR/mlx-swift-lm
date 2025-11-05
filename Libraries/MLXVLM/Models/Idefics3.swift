@@ -1,6 +1,6 @@
 //
 //  Idefics3.swift
-//  mlx-swift-examples
+//  mlx-swift-lm
 //
 //  Created by SHUHONG WU on 12/13/24.
 //

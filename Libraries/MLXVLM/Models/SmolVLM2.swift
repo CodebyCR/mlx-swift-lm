@@ -1,6 +1,6 @@
 //
 //  SmolVLM2.swift
-//  mlx-swift-examples
+//  mlx-swift-lm
 //
 //  Created by Pedro Cuenca on 20/3/25.
 //

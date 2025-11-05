@@ -1,6 +1,6 @@
 //
 //  LFM2MoE.swift
-//  mlx-swift-examples
+//  mlx-swift-lm
 //
 //  Created by Sachin Desai on 10/08/25.
 //

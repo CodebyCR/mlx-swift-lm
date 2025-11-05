@@ -1,6 +1,6 @@
 //
 //  Gemma.swift
-//  mlx-swift-examples
+//  mlx-swift-lm
 //
 //  Created by Anthony DePasquale on 17.03.2025.
 //

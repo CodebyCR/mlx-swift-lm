@@ -38,16 +38,6 @@ jobs:
             swift --version
             find . -name Package.resolved -exec rm {} \;
             xcodebuild test -scheme mlx-libraries-Package -destination 'platform=OS X'
-      - run:
-          name: Build Examples
-          command: |
-            xcodebuild -version
-            xcrun --show-sdk-build-version
-            swift --version
-            find . -name Package.resolved -exec rm {} \;
-            xcodebuild -scheme llm-tool
-            xcodebuild -scheme image-tool
-            xcodebuild -scheme mnist-tool
 
 workflows:
   build_and_test:
@@ -62,7 +52,7 @@ workflows:
       - mac_build_and_test:
           matrix:
             parameters:
-              xcode_version: ["16.0.0", "16.3.0"]
+              xcode_version: ["16.3.0"]
 
   prb:
     when:
@@ -78,4 +68,4 @@ workflows:
           requires: [ hold ]
           matrix:
             parameters:
-              xcode_version: ["16.0.0", "16.3.0"]
+              xcode_version: ["16.3.0"]

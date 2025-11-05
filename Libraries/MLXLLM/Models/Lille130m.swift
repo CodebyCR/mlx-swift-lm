@@ -1,6 +1,6 @@
 //
 //  Lille130m.swift
-//  mlx-swift-examples
+//  mlx-swift-lm
 //
 //  Created by Sachin Desai on 9/10/25.
 //

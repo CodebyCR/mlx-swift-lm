@@ -1,6 +1,6 @@
 //
 //  Granite.swift
-//  mlx-swift-examples
+//  mlx-swift-lm
 //
 //  Created by Sachin Desai on 4/25/25.
 //

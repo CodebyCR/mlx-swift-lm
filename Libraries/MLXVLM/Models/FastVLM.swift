@@ -1,6 +1,6 @@
 //
 //  FastVLM.swift
-//  mlx-swift-examples
+//  mlx-swift-lm
 //
 //  Created by Pedro Cuenca on 18/10/25.
 //

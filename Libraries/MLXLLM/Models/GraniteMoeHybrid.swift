@@ -1,6 +1,6 @@
 //
 //  GraniteMoeHybrid.swift
-//  mlx-swift-examples
+//  mlx-swift-lm
 //
 //  Created by Sachin Desai on 10/03/25.
 //
