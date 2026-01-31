@@ -3,12 +3,6 @@
 import MLX
 import MLXNN
 
-extension MLXArray {
-    public static func arange(_ size: Int) -> MLXArray {
-        return MLXArray(Array(0 ..< size))
-    }
-}
-
 private class BertEmbedding: Module {
 
     let typeVocabularySize: Int
