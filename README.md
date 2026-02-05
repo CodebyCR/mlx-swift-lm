@@ -26,7 +26,7 @@ Add the following dependency to your Package.swift:
 or use the latest release:
 
 ```swift
-.package(url: "https://github.com/ml-explore/mlx-swift-lm/", .upToNextMinor(from: "2.29.1")),
+.package(url: "https://github.com/ml-explore/mlx-swift-lm/", .upToNextMinor(from: "2.30.4")),
 ```
 
 Then add one or more libraries to the target as a dependency:
@@ -51,8 +51,8 @@ variety of open weights LLMs and VLMs using this simplified API:
 ```swift
 let model = try await loadModel(id: "mlx-community/Qwen3-4B-4bit")
 let session = ChatSession(model)
-print(try await session.respond(to: "What are two things to see in San Francisco?")
-print(try await session.respond(to: "How about a great place to eat?")
+print(try await session.respond(to: "What are two things to see in San Francisco?"))
+print(try await session.respond(to: "How about a great place to eat?"))
 ```
 
 Or use the underlying API to control every aspect of the evaluation.
