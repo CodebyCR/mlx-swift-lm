@@ -65,13 +65,20 @@ struct EmbedderIntegrationtests {
         let similarities = documentEmbeddings.map { documentEmbedding in
             zip(searchQueryEmbedding, documentEmbedding).map(*).reduce(0, +)
         }
-        let documentNames = searchInputs[1...].map{ $0.replacingOccurrences(of: "search_document: ", with: "") }
-        let expectedSimilarities: [Float] = [0.6854175,  // Elephants
-                                             0.6644787,  // Horses
-                                             0.63326025] // Polar Bears
+        let documentNames = searchInputs[1...].map {
+            $0.replacingOccurrences(of: "search_document: ", with: "")
+        }
+        let expectedSimilarities: [Float] = [
+            0.6854175,  // Elephants
+            0.6644787,  // Horses
+            0.63326025,
+        ]  // Polar Bears
 
         for (index, resultSimilarity) in similarities.enumerated() {
-            #expect(resultSimilarity.isEqual(to: expectedSimilarities[index]), "The expected similarity does not match the result similarity for \(documentNames[index])")
+            #expect(
+                resultSimilarity.isEqual(to: expectedSimilarities[index]),
+                "The expected similarity does not match the result similarity for \(documentNames[index])"
+            )
         }
     }
 }
