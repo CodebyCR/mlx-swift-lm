@@ -6,7 +6,7 @@ import MLXEmbedders
 import Testing
 import Tokenizers
 
-struct EmbedderExampleTests {
+struct EmbedderIntegrationtests {
 
     private func readeMeExampleResult() async throws -> ([String], [[Float]]) {
         let modelContainer = try await loadModelContainer(configuration: .nomic_text_v1_5)
@@ -49,11 +49,11 @@ struct EmbedderExampleTests {
         return (searchInputs, resultEmbeddings)
     }
 
-    @Test("README.md example")
+    @Test("MLXEmbedders README.md example")
     func testReadMeExample() async throws {
         guard let (searchInputs, resultEmbeddings) = try? await readeMeExampleResult() else {
             throw NSError(
-                domain: "EmbedderExampleTests",
+                domain: "EmbedderIntegrationtests",
                 code: 1,
                 userInfo: [NSLocalizedDescriptionKey: "Failed to get example results"]
             )
@@ -65,28 +65,13 @@ struct EmbedderExampleTests {
         let similarities = documentEmbeddings.map { documentEmbedding in
             zip(searchQueryEmbedding, documentEmbedding).map(*).reduce(0, +)
         }
+        let documentNames = searchInputs[1...].map{ $0.replacingOccurrences(of: "search_document: ", with: "") }
+        let expectedSimilarities: [Float] = [0.6854175,  // Elephants
+                                             0.6644787,  // Horses
+                                             0.63326025] // Polar Bears
 
-        //        let searchQueryName = searchInputs[0].replacingOccurrences(of: "search_query: ", with: "")
-        //        let documentNames = searchInputs[1...].map{ $0.replacingOccurrences(of: "search_document: ", with: "") }
-        //
-        //        print()
-        //        print("Similarities to '\(searchQueryName)':")
-        //        for (index, sim) in similarities.enumerated() {
-        //            print(" -> \(sim)\tfor Document '\(documentNames[index])'" )
-        //        }
-        //        print()
-
-        #expect(
-            searchInputs.count == 4,
-            "If this fails please update the test with new search inputs."
-        )
-        #expect(
-            similarities.count == 3,
-            "If this fails please update the test with new search inputs."
-        )
-        #expect(
-            similarities[0] > similarities[1],
-            "Elephants should be more similar to the query than Horses."
-        )
+        for (index, resultSimilarity) in similarities.enumerated() {
+            #expect(resultSimilarity.isEqual(to: expectedSimilarities[index]), "The expected similarity does not match the result similarity for \(documentNames[index])")
+        }
     }
 }
