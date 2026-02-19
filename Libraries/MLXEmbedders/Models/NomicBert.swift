@@ -792,7 +792,7 @@ public class NomicBertModel: Module, EmbeddingModel {
                 .replacingOccurrences(of: "cls.predictions.decoder", with: "lm_head.decoder")
                 // Remap Pooler keys
                 .replacingOccurrences(of: "pooler.dense.", with: "pooler.")
-                
+
             result[key] = item.value
         }
     }
