@@ -48,6 +48,10 @@ private class ModelTypeRegistry: @unchecked Sendable {
             let configuration = try JSONDecoder.json5().decode(Gemma3Configuration.self, from: data)
             return EmbeddingGemma(configuration)
         },
+        "siglip": { data in
+            let configuration = try JSONDecoder.json5().decode(SiglipConfiguration.self, from: data)
+            return SigLIP2(configuration)
+        },
     ]
 
     public func registerModelType(

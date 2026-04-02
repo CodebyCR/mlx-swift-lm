@@ -136,7 +136,9 @@ let package = Package(
             exclude: [
                 "README.md"
             ],
-
+            resources: [
+                .process("Resources/black_dog.jpg")
+            ],
             swiftSettings: [
                 .enableExperimentalFeature("StrictConcurrency")
             ]
