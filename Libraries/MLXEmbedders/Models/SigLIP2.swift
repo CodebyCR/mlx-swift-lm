@@ -106,8 +106,8 @@ private class SiglipMLP: Module {
     @ModuleInfo(key: "fc2") var fc2: Linear
 
     init(hiddenSize: Int, intermediateSize: Int) {
-        self._fc1.wrappedValue = Linear(hiddenSize, intermediateSize)
-        self._fc2.wrappedValue = Linear(intermediateSize, hiddenSize)
+        self._fc1.wrappedValue = Linear(hiddenSize, intermediateSize, bias: false)
+        self._fc2.wrappedValue = Linear(intermediateSize, hiddenSize, bias: false)
         super.init()
     }
 
@@ -123,7 +123,7 @@ private class SiglipTransformerLayer: Module {
     @ModuleInfo(key: "mlp") var mlp: SiglipMLP
 
     init(hiddenSize: Int, numHeads: Int, intermediateSize: Int, eps: Float) {
-        self._attention.wrappedValue = MultiHeadAttention(dimensions: hiddenSize, numHeads: numHeads, bias: true)
+        self._attention.wrappedValue = MultiHeadAttention(dimensions: hiddenSize, numHeads: numHeads, bias: false)
         self._layerNorm1.wrappedValue = LayerNorm(dimensions: hiddenSize, eps: eps)
         self._layerNorm2.wrappedValue = LayerNorm(dimensions: hiddenSize, eps: eps)
         self._mlp.wrappedValue = SiglipMLP(hiddenSize: hiddenSize, intermediateSize: intermediateSize)
@@ -189,17 +189,17 @@ private class SiglipVisionEmbeddings: Module {
 
 private class SiglipAttentionMapHead: Module {
     @ModuleInfo(key: "attention") var attention: MultiHeadAttention
-    @ModuleInfo(key: "latent_query") var latentQuery: MLXArray
+    @ParameterInfo(key: "latent") var latent: MLXArray
 
     init(hiddenSize: Int, numHeads: Int) {
-        self._attention.wrappedValue = MultiHeadAttention(dimensions: hiddenSize, numHeads: numHeads, bias: true)
-        self._latentQuery.wrappedValue = MLXArray.zeros([1, 1, hiddenSize])
+        self._attention.wrappedValue = MultiHeadAttention(dimensions: hiddenSize, numHeads: numHeads, bias: false)
+        self._latent.wrappedValue = MLXArray.zeros([1, 1, hiddenSize])
         super.init()
     }
 
     func callAsFunction(_ x: MLXArray) -> MLXArray {
         let B = x.dim(0)
-        let q = broadcast(latentQuery, to: [B, 1, latentQuery.dim(2)])
+        let q = broadcast(latent, to: [B, 1, latent.dim(2)])
         return attention(q, keys: x, values: x)
     }
 }
